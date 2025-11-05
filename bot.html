@@ -1,0 +1,117 @@
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+
+    label {
+      display: inline-block;
+      width: 150px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    input,
+    select {
+      padding: 5px;
+      margin-bottom: 15px;
+      width: 200px;
+    }
+
+    .form-row {
+      margin-bottom: 10px;
+    }
+  </style>
+  <script type="text/javascript" charset="utf-8">
+    let queryParams = new URLSearchParams(window.location.search);
+    let depId = queryParams.get('depId');
+    (function (g, e, n, es, ys) {
+      g['_genesysJs'] = e;
+      g[e] = g[e] || function () {
+        (g[e].q = g[e].q || []).push(arguments)
+      };
+      g[e].t = 1 * new Date();
+      g[e].c = es;
+      ys = document.createElement('script'); ys.async = 1; ys.src = n; ys.charset = 'utf-8'; document.head.appendChild(ys);
+    })(window, 'Genesys', 'https://apps.mypurecloud.com/genesys-bootstrap/genesys.min.js', {
+      environment: 'prod',
+      deploymentId: depId
+    });
+  </script>
+  <title>Bot Client</title>
+</head>
+
+<body>
+  <h2>Bot Client Testing...</h2>
+
+  <div class="form-row">
+    <label for="magicKey">Magic:</label>
+    <input type="text" id="magicKey" name="magicKey" />
+  </div>
+
+  <div class="form-row">
+    <label for="docCategory">Category:</label>
+    <select id="docCategory" name="docCategory">
+      <option value="All" selected>All</option>
+      <option value="Transcript">Transcript</option>
+      <option value="G2 Reports">G2 Reports</option>
+      <option value="Company Research">Company Research</option>
+    </select>
+  </div>
+
+  <div class="form-row">
+    <label for="langCode">Language:</label>
+    <select id="langCode" name="langCode">
+      <option value="en-us" selected>English</option>
+      <option value="fr-fr">French</option>
+      <option value="it-it">Italian</option>
+      <option value="es-es">Spanish</option>
+      <option value="pt-pt">Portuguese</option>
+      <option value="de-de">German</option>
+    </select>
+  </div>
+
+  <div class="form-row">
+    <label for="provideRef" style="width: auto">Provide References:</label>
+    <input type="checkbox" id="provideRef" name="provideRef" style="width: auto" />
+  </div>
+
+  <script>
+    // Function to log current values of all input fields
+    function setMessengerCustomerAttributes() {
+      const magicKey = document.getElementById("magicKey").value;
+      const docCategory = document.getElementById("docCategory").value;
+      const langCode = document.getElementById("langCode").value;
+      const provideRef = document.getElementById("provideRef").checked;
+
+      console.log("Current Values:");
+      console.log("Magic:", magicKey);
+      console.log("Category:", docCategory);
+      console.log("Language:", langCode);
+      console.log("Provide References:", provideRef);
+
+      Genesys("command", "Database.set",
+        { messaging: { customAttributes: { magicKey: !magicKey ? 'empty' : magicKey, docCategory: docCategory, langCode: langCode, provideRef: provideRef.toString() } } },
+        function (data) { /* fulfilled, returns data */ },
+        function () { /* rejected */ }
+      );
+    }
+
+    // Add event listeners for all input fields
+    document.getElementById("magicKey").addEventListener("input", setMessengerCustomerAttributes);
+    document.getElementById("docCategory").addEventListener("change", setMessengerCustomerAttributes);
+    document.getElementById("langCode").addEventListener("change", setMessengerCustomerAttributes);
+    document.getElementById("provideRef").addEventListener("change", setMessengerCustomerAttributes);
+
+    Genesys("subscribe", "Launcher.ready" , function(o){
+      setMessengerCustomerAttributes();
+    });
+  </script>
+</body>
+
+</html>
