@@ -81,6 +81,11 @@
     <input type="checkbox" id="provideRef" name="provideRef" style="width: auto" />
   </div>
 
+  <div class="form-row">
+    <label for="smartFilter" style="width: auto">Use "Smart" Company filter:</label>
+    <input type="checkbox" id="smartFilter" name="smartFilter" style="width: auto" />
+  </div>
+
   <script>
     // Function to log current values of all input fields
     function setMessengerCustomerAttributes() {
@@ -88,15 +93,17 @@
       const docCategory = document.getElementById("docCategory").value;
       const langCode = document.getElementById("langCode").value;
       const provideRef = document.getElementById("provideRef").checked;
+      const smartFilter = document.getElementById("smartFilter").checked;
 
       console.log("Current Values:");
       console.log("Magic:", magicKey);
       console.log("Category:", docCategory);
       console.log("Language:", langCode);
       console.log("Provide References:", provideRef);
+      console.log("Smart Filter:", smartFilter);
 
       Genesys("command", "Database.set",
-        { messaging: { customAttributes: { magicKey: !magicKey ? 'empty' : magicKey, docCategory: docCategory, langCode: langCode, provideRef: provideRef.toString() } } },
+        { messaging: { customAttributes: { magicKey: !magicKey ? 'empty' : magicKey, docCategory: docCategory, langCode: langCode, provideRef: provideRef.toString(), smartFilter: smartFilter.toString() } } },
         function (data) { /* fulfilled, returns data */ },
         function () { /* rejected */ }
       );
@@ -107,6 +114,7 @@
     document.getElementById("docCategory").addEventListener("change", setMessengerCustomerAttributes);
     document.getElementById("langCode").addEventListener("change", setMessengerCustomerAttributes);
     document.getElementById("provideRef").addEventListener("change", setMessengerCustomerAttributes);
+    document.getElementById("smartFilter").addEventListener("change", setMessengerCustomerAttributes);
 
     Genesys("subscribe", "Launcher.ready" , function(o){
       setMessengerCustomerAttributes();
