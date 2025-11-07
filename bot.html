@@ -62,6 +62,7 @@
       <option value="G Data">G Data</option>
       <option value="G Reports">G Reports</option>
       <option value="G Switch">G Switch</option>
+      <option value="Curated Switch">Curated Switch</option>
       <option value="Company Research">Company Research</option>
     </select>
   </div>
@@ -76,6 +77,11 @@
       <option value="pt-pt">Portuguese</option>
       <option value="de-de">German</option>
     </select>
+  </div>
+
+  <div class="form-row">
+    <label for="nbResults">Nb Results:</label>
+    <input type="text" id="nbResults" name="nbResults" value="20" />
   </div>
 
   <div class="form-row">
@@ -102,6 +108,7 @@
       const provideRef = document.getElementById("provideRef").checked;
       const smartFilter = document.getElementById("smartFilter").checked;
       const queryDecomp = document.getElementById("queryDecomp").checked;
+      const nbResults = document.getElementById("nbResults").value;
 
       console.log("Current Values:");
       console.log("Magic:", magicKey);
@@ -110,9 +117,10 @@
       console.log("Provide References:", provideRef);
       console.log("Smart Filter:", smartFilter);
       console.log("Query Decomposition:", queryDecomp);
+      console.log("Nb Results:", nbResults);
 
       Genesys("command", "Database.set",
-        { messaging: { customAttributes: { magicKey: !magicKey ? 'empty' : magicKey, docCategory: docCategory, langCode: langCode, provideRef: provideRef.toString(), smartFilter: smartFilter.toString(), queryDecomp: queryDecomp.toString() } } },
+        { messaging: { customAttributes: { magicKey: !magicKey ? 'empty' : magicKey, docCategory: docCategory, langCode: langCode, provideRef: provideRef.toString(), smartFilter: smartFilter.toString(), queryDecomp: queryDecomp.toString(), nbResults: nbResults } } },
         function (data) { /* fulfilled, returns data */ },
         function () { /* rejected */ }
       );
@@ -125,6 +133,7 @@
     document.getElementById("provideRef").addEventListener("change", setMessengerCustomerAttributes);
     document.getElementById("smartFilter").addEventListener("change", setMessengerCustomerAttributes);
     document.getElementById("queryDecomp").addEventListener("change", setMessengerCustomerAttributes);
+    document.getElementById("nbResults").addEventListener("change", setMessengerCustomerAttributes);
 
     Genesys("subscribe", "Launcher.ready" , function(o){
       setMessengerCustomerAttributes();
