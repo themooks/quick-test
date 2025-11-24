@@ -141,6 +141,12 @@
     document.getElementById("nbResults").addEventListener("change", setMessengerCustomerAttributes);
 
     Genesys("subscribe", "Launcher.ready" , function(o){
+      console.log("Launcher Ready");
+      setMessengerCustomerAttributes();
+    });
+
+    Genesys("subscribe", "Messenger.ready" , function(o){
+      console.log("Messenger Ready");
       setMessengerCustomerAttributes();
     });
   </script>
