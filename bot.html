@@ -145,8 +145,8 @@
       setMessengerCustomerAttributes();
     });
 
-    Genesys("subscribe", "Messenger.ready" , function(o){
-      console.log("Messenger Ready");
+    Genesys("subscribe", "Messenger.opened" , function(o){
+      console.log("Messenger Opened");
       setMessengerCustomerAttributes();
     });
   </script>
