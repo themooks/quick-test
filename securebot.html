@@ -281,7 +281,7 @@
 				});
 
 				Genesys("command", "Database.set",
-					{ messaging: { customAttributes: { magicKey: 'empty', docCategory: docCategory, langCode: langCode, provideRef: provideRef.toString(), smartFilter: smartFilter.toString(), queryDecomp: queryDecomp.toString(), nbResults: nbResults } } },
+					{ messaging: { customAttributes: { docCategory: docCategory, langCode: langCode, provideRef: provideRef.toString(), smartFilter: smartFilter.toString(), queryDecomp: queryDecomp.toString(), nbResults: nbResults } } },
 					function (data) { /* fulfilled, returns data */ },
 					function () { /* rejected */ }
 				);
