@@ -42,17 +42,15 @@
         // })
 
         console.log(`parent location origin: ${window.parent.location.origin}`);
-        // console.log(`opener location href: ${window.opener.location.href}`);
-        // let openerUrl = new URL(window.opener.location.href);
         window.opener.postMessage(authMessage, '*');
         // Force close
         console.log('Continues....');
-        // let closeTimeout = setTimeout(
-        //   function () {
-        //     window.close();
-        //   },
-        //   50000
-        // );
+        let closeTimeout = setTimeout(
+          function () {
+            window.close();
+          },
+          2000
+        );
 
       } catch (err) {
         console.log('Error: ', err)
