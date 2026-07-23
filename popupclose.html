@@ -41,17 +41,17 @@
         //   );
         // })
 
-        console.log(`authMessage: ${authMessage}`);
+        console.log(`authMessage: ${JSON.stringify(authMessage, null, 4)}`);
         console.log(`parent location origin: ${window.parent.location.origin}`);
         window.opener.postMessage(authMessage, window.parent.location.origin);
         // Force close
         console.log('Continues....');
-        let closeTimeout = setTimeout(
-          function () {
-            window.close();
-          },
-          50000
-        );
+        // let closeTimeout = setTimeout(
+        //   function () {
+        //     window.close();
+        //   },
+        //   50000
+        // );
 
       } catch (err) {
         console.log('Error: ', err)
