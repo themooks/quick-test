@@ -25,27 +25,27 @@
         if (window.location.hash) authMessage.hash = window.location.hash;
         if (window.location.search) authMessage.search = window.location.search;
 
-        // window.addEventListener('message', (event) => {
-        //   console.log("from event:");
-        //   console.log(event.origin);
-        //   console.log("from parent:");
-        //   console.log(window.parent.location.origin);
-        //   event.source.postMessage(authMessage, event.origin);
-        //   // Force close
-        //   // window.close()
-        //   let closeTimeout = setTimeout(
-        //     function () {
-        //       window.close();
-        //     },
-        //     2000
-        //   );
-        // })
+        window.addEventListener('message', (event) => {
+          console.log("from event:");
+          console.log(event.origin);
+          console.log("from parent:");
+          console.log(window.parent.location.origin);
+          event.source.postMessage(authMessage, event.origin);
+          // Force close
+          console.log('Continues....');
+          // let closeTimeout = setTimeout(
+          //   function () {
+          //     window.close();
+          //   },
+          //   2000
+          // );
+        })
 
-        console.log(`authMessage: ${JSON.stringify(authMessage, null, 4)}`);
-        console.log(`parent location origin: ${window.parent.location.origin}`);
-        window.opener.postMessage(authMessage, window.parent.location.origin);
+        // console.log(`authMessage: ${JSON.stringify(authMessage, null, 4)}`);
+        // console.log(`parent location origin: ${window.parent.location.origin}`);
+        // window.opener.postMessage(authMessage, window.parent.location.origin);
         // Force close
-        console.log('Continues....');
+        // console.log('Continues....');
         // let closeTimeout = setTimeout(
         //   function () {
         //     window.close();
