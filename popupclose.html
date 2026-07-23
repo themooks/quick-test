@@ -42,9 +42,9 @@
         // })
 
         console.log(`parent location origin: ${window.parent.location.origin}`);
-        console.log(`opener location href: ${window.opener.location.href}`);
-        let openerUrl = new URL(window.opener.location.href);
-        window.opener.postMessage(authMessage, `${popupLocationOrigin.protocol}//${popupLocationOrigin.host}`);
+        // console.log(`opener location href: ${window.opener.location.href}`);
+        // let openerUrl = new URL(window.opener.location.href);
+        window.opener.postMessage(authMessage, '*');
         // Force close
         console.log('Continues....');
         // let closeTimeout = setTimeout(
