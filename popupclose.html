@@ -44,8 +44,9 @@
         // })
 
         console.log(`parent location origin: ${window.parent.location.origin}`);
-        console.log(`opener location origin: ${window.opener.location.origin}`);
-        window.opener.postMessage(authMessage, window.parent.location.origin);
+        // console.log(`opener location origin: ${window.opener.location.origin}`);
+        // window.opener.postMessage(authMessage, window.parent.location.origin);
+        window.opener.postMessage(authMessage, 'http://localhost:8080');
         // Force close
         console.log('Continues....');
         // let closeTimeout = setTimeout(
