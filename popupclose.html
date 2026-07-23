@@ -41,13 +41,16 @@
         //   );
         // })
 
+        console.log(`authMessage: ${authMessage}`);
+        console.log(`parent location origin: ${window.parent.location.origin}`);
         window.opener.postMessage(authMessage, window.parent.location.origin);
         // Force close
+        console.log('Continues....');
         let closeTimeout = setTimeout(
           function () {
             window.close();
           },
-          2000
+          50000
         );
 
       } catch (err) {
