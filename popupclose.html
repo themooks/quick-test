@@ -25,28 +25,28 @@
         if (window.location.hash) authMessage.hash = window.location.hash;
         if (window.location.search) authMessage.search = window.location.search;
 
-        // window.addEventListener('message', (event) => {
-        //   console.log("from event:");
-        //   // event - app frame
-        //   console.log(event.origin);
-        //   console.log("from parent:");
-        //   // parent - github popup
-        //   console.log(window.parent.location.origin);
-        //   event.source.postMessage(authMessage, event.origin);
-        //   // Force close
-        //   console.log('Continues....');
-        //   // let closeTimeout = setTimeout(
-        //   //   function () {
-        //   //     window.close();
-        //   //   },
-        //   //   2000
-        //   // );
-        // })
+        window.addEventListener('message', (event) => {
+          console.log("from event:");
+          // event - app frame
+          console.log(event.origin);
+          console.log("from parent:");
+          // parent - github popup
+          console.log(window.parent.location.origin);
+          event.source.postMessage(authMessage, event.origin);
+          // Force close
+          console.log('Continues....');
+          // let closeTimeout = setTimeout(
+          //   function () {
+          //     window.close();
+          //   },
+          //   2000
+          // );
+        })
 
-        console.log(`parent location origin: ${window.parent.location.origin}`);
+        // console.log(`parent location origin: ${window.parent.location.origin}`);
         // console.log(`opener location origin: ${window.opener.location.origin}`);
         // window.opener.postMessage(authMessage, window.parent.location.origin);
-        window.opener.postMessage(authMessage, 'http://localhost:8080');
+        // window.opener.postMessage(authMessage, 'http://localhost:8080');
         // Force close
         console.log('Continues....');
         // let closeTimeout = setTimeout(
