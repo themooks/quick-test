@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="robots" content="noindex" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Genesys PKCE Auth</title>
+  <meta name="Template" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body onload="start()">
+  <script>
+    'use strict' //Enables strict mode is JavaScript
+
+    async function start() {
+      try {
+        let authMessage = {
+          name: "gc_popup_msg",
+          hash: "",
+          search: ""
+        };
+
+        if (window.location.hash) authMessage.hash = window.location.hash;
+        if (window.location.search) authMessage.search = window.location.search;
+
+        // window.addEventListener('message', (event) => {
+        //   console.log("from event:");
+        //   console.log(event.origin);
+        //   console.log("from parent:");
+        //   console.log(window.parent.location.origin);
+        //   event.source.postMessage(authMessage, event.origin);
+        //   // Force close
+        //   // window.close()
+        //   let closeTimeout = setTimeout(
+        //     function () {
+        //       window.close();
+        //     },
+        //     2000
+        //   );
+        // })
+
+        window.opener.postMessage(authMessage, window.parent.location.origin);
+        // Force close
+        let closeTimeout = setTimeout(
+          function () {
+            window.close();
+          },
+          2000
+        );
+
+      } catch (err) {
+        console.log('Error: ', err)
+      }
+    }
+  </script>
+</body>
+
+</html>
